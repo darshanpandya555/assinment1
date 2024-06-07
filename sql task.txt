@@ -1,0 +1,249 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jun 06, 2024 at 06:40 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `emp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `employee_view`
+-- (See below for the actual view)
+--
+CREATE TABLE `employee_view` (
+`FIRST_NAME` varchar(100)
+,`LAST_NAME` varchar(255)
+,`SALARY` float
+);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_customer`
+--
+
+CREATE TABLE `tbl_customer` (
+  `cnm` int(11) NOT NULL,
+  `cname` varchar(100) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `sng` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_customer`
+--
+
+INSERT INTO `tbl_customer` (`cnm`, `cname`, `city`, `rating`, `sng`) VALUES
+(201, 'hoffman', 'london', 100, 1001),
+(202, 'giovanne', 'rome', 200, 1003),
+(203, 'liu', 'san jose', 300, 1002),
+(204, 'grass', 'barcelona', 100, 1002),
+(206, 'clemens', 'london', 300, 1007),
+(207, 'pereira', 'rome', 100, 1004);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_employee`
+--
+
+CREATE TABLE `tbl_employee` (
+  `em_id` int(11) NOT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `salary` float DEFAULT NULL,
+  `joining_date` date DEFAULT NULL,
+  `department` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_employee`
+--
+
+INSERT INTO `tbl_employee` (`em_id`, `first_name`, `last_name`, `salary`, `joining_date`, `department`) VALUES
+(1, 'john', 'abraham', 1000000, '2013-01-01', 'bankink'),
+(2, 'michael', 'clerk', 800000, '2013-01-01', 'insurance'),
+(3, 'roy', 'thomas', 700000, '2013-02-01', 'banking'),
+(4, 'tom', 'jose', 600000, '2013-02-01', 'insurance'),
+(5, 'jerry', 'pinto', 6500000, '2013-01-01', 'insurance'),
+(6, 'philip', 'mathew', 750000, '2013-01-01', 'service'),
+(7, 'testname1', '123', 6500000, '2013-01-01', 'service'),
+(8, 'testname2', 'lname%', 600000, '2013-02-01', 'insurance');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_incentives`
+--
+
+CREATE TABLE `tbl_incentives` (
+  `INSENTIVE_id` int(11) NOT NULL,
+  `employee_ref_id` int(11) DEFAULT NULL,
+  `incentive_date` date DEFAULT NULL,
+  `incentive` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_incentives`
+--
+
+INSERT INTO `tbl_incentives` (`INSENTIVE_id`, `employee_ref_id`, `incentive_date`, `incentive`) VALUES
+(1, 1, '2013-02-01', 5000),
+(2, 2, '2013-02-01', 3000),
+(3, 3, '2013-02-01', 4000),
+(4, 1, '2013-01-01', 4500),
+(5, 2, '2013-01-01', 3500);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_order`
+--
+
+CREATE TABLE `tbl_order` (
+  `onm` int(11) NOT NULL,
+  `amt` float DEFAULT NULL,
+  `ode` date DEFAULT NULL,
+  `cnm` int(11) DEFAULT NULL,
+  `sno` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_order`
+--
+
+INSERT INTO `tbl_order` (`onm`, `amt`, `ode`, `cnm`, `sno`) VALUES
+(3001, 18.69, '1994-10-03', 201, 1007),
+(3002, 1900.1, '1994-10-03', 207, 1004),
+(3003, 767.13, '1994-10-03', 201, 1001),
+(3005, 3005, '1994-10-03', 203, 1002),
+(3006, 3006, '1994-10-04', 201, 1007),
+(3007, 3007, '1994-10-05', 204, 1002),
+(3008, 3008, '1994-10-05', 206, 1001),
+(3009, 3009, '1994-10-04', 202, 1003),
+(3010, 3010, '1994-10-06', 204, 1002),
+(3011, 3011, '1994-10-06', 206, 1001);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_salesperson`
+--
+
+CREATE TABLE `tbl_salesperson` (
+  `sno` int(11) NOT NULL,
+  `sname` varchar(100) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `comm` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_salesperson`
+--
+
+INSERT INTO `tbl_salesperson` (`sno`, `sname`, `city`, `comm`) VALUES
+(1001, 'peel', 'london', 0.12),
+(1002, 'serres', 'san jose', 0.13),
+(1003, 'axelrod', 'new york', 0.1),
+(1004, 'motika', 'london', 0.11),
+(1007, 'rafkin', 'barcelona', 0.15);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `employee_view`
+--
+DROP TABLE IF EXISTS `employee_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `employee_view`  AS SELECT `tbl_employee`.`first_name` AS `FIRST_NAME`, `tbl_employee`.`last_name` AS `LAST_NAME`, `tbl_employee`.`salary` AS `SALARY` FROM `tbl_employee` ;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tbl_customer`
+--
+ALTER TABLE `tbl_customer`
+  ADD PRIMARY KEY (`cnm`);
+
+--
+-- Indexes for table `tbl_employee`
+--
+ALTER TABLE `tbl_employee`
+  ADD PRIMARY KEY (`em_id`);
+
+--
+-- Indexes for table `tbl_incentives`
+--
+ALTER TABLE `tbl_incentives`
+  ADD PRIMARY KEY (`INSENTIVE_id`);
+
+--
+-- Indexes for table `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  ADD PRIMARY KEY (`onm`);
+
+--
+-- Indexes for table `tbl_salesperson`
+--
+ALTER TABLE `tbl_salesperson`
+  ADD PRIMARY KEY (`sno`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tbl_customer`
+--
+ALTER TABLE `tbl_customer`
+  MODIFY `cnm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+
+--
+-- AUTO_INCREMENT for table `tbl_employee`
+--
+ALTER TABLE `tbl_employee`
+  MODIFY `em_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `tbl_incentives`
+--
+ALTER TABLE `tbl_incentives`
+  MODIFY `INSENTIVE_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  MODIFY `onm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3012;
+
+--
+-- AUTO_INCREMENT for table `tbl_salesperson`
+--
+ALTER TABLE `tbl_salesperson`
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1008;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
